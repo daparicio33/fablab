@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AdministsradorProyectoController extends Controller
 {
@@ -11,9 +14,16 @@ class AdministsradorProyectoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
+        $proyectos = Proyecto::orderby('id','desc')
+        ->get();
+        return view('administradores.proyectos.index',compact('proyectos'));
     }
 
     /**
@@ -24,6 +34,7 @@ class AdministsradorProyectoController extends Controller
     public function create()
     {
         //
+        return view('administradores.proyectos.create');
     }
 
     /**
@@ -35,6 +46,17 @@ class AdministsradorProyectoController extends Controller
     public function store(Request $request)
     {
         //
+        try {
+            //code...
+            $proyecto = new Proyecto;
+            $proyecto->create($request->all());
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('administradores.proyectos.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('administradores.proyectos.index')
+        ->with('info','la informacion se guardo de forma correcta');
     }
 
     /**
@@ -57,6 +79,8 @@ class AdministsradorProyectoController extends Controller
     public function edit($id)
     {
         //
+        $proyecto = Proyecto::findOrFail($id);
+        return view('administradores.proyectos.edit',compact('proyecto'));
     }
 
     /**
@@ -69,6 +93,17 @@ class AdministsradorProyectoController extends Controller
     public function update(Request $request, $id)
     {
         //
+        try {
+            //code...
+            $proyecto = Proyecto::findOrFail($id);
+            $proyecto->update($request->all());
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('administradores.proyectos.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('administradores.proyectos.index')
+        ->with('info','la informacion del proyecto se actualizo correctamente');
     }
 
     /**
@@ -80,5 +115,16 @@ class AdministsradorProyectoController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            //code...
+            $proyecto = Proyecto::findOrFail($id);
+            $proyecto->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('administradores.proyectos.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('administradores.proyectos.index')
+        ->with('info','el proyecto se elmino correctamente');
     }
 }

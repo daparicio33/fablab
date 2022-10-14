@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proyecto;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdministradorAutorController extends Controller
@@ -14,6 +16,7 @@ class AdministradorAutorController extends Controller
     public function index()
     {
         //
+        return view('administradores.autores.index');
     }
 
     /**
@@ -24,6 +27,13 @@ class AdministradorAutorController extends Controller
     public function create()
     {
         //
+        $users = User::orderBy('name','asc')
+        ->pluck('name','id')
+        ->toArray();
+        $proyectos = Proyecto::orderBy('nombre','asc')
+        ->pluck('nombre','id')
+        ->toArray();
+        return view('administradores.autores.create',compact('users','proyectos'));
     }
 
     /**

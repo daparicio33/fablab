@@ -13,7 +13,4 @@ class Proyecto extends Model
         'fecha',
         'descripcion'
     ];
-    public function autores(){
-        return $this->hasMany(Autore::class);
-    }
 }

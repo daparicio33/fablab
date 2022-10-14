@@ -32,11 +32,17 @@ Route::get('/', function () {
 });
 
 //Rutas Autores
-Route::get('autores',[AutorInicioController::class,'index'])->name('autores.inicio');
-Route::resource('autores/entradas',AutorProyectoEntradaController::class)->names('autores.entradas');
-Route::resource('autores/proyectos',AutorProyectoController::class)->names('autores.proyectos');
+Route::get('autores',[AutorInicioController::class,'index'])
+->name('autores.inicio');
+Route::resource('autores/entradas',AutorProyectoEntradaController::class)
+->names('autores.entradas');
+Route::resource('autores/proyectos',AutorProyectoController::class)
+->names('autores.proyectos');
 
 //RUtas de Administrador
-Route::get('administradores',[AdministradorInicioController::class,'index'])->name('administradores.inicio');
-Route::resource('administradores/autores',AdministradorAutorController::class)->names('administradores.autores');
-Route::resource('administradores/proyectos',AdministsradorProyectoController::class)->names('administradores.proyectos');
+Route::get('administradores',[AdministradorInicioController::class,'index'])
+->name('administradores.inicio');
+Route::resource('administradores/autores',AdministradorAutorController::class)
+->names('administradores.autores');
+Route::resource('administradores/proyectos',AdministsradorProyectoController::class)
+->names('administradores.proyectos');

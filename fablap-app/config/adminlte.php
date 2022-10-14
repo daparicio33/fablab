@@ -513,6 +513,16 @@ return [
                 ],
             ],
         ],
+        'Admin' =>[
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'js/admin.js',
+                ],
+            ],
+        ],
     ],
 
     /*

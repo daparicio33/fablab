@@ -8,7 +8,6 @@
   <title>@yield('titulo')</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
-
   <!-- Favicons -->
   <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
   <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
@@ -100,7 +99,7 @@
   @yield('slider')
   
   <main id="main">
-  
+    @include('sweetalert::alert')
     @yield('cuerpo')
 
   </main><!-- End #main -->
