@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAutoresTable extends Migration
+class CreateMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateAutoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('autores', function (Blueprint $table) {
+        Schema::create('media', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('proyecto_id');
+            $table->string('url');
+            $table->longText('descripcion');
+            $table->string('tipo');
+            $table->unsignedBigInteger('entrada_id');
+            $table->foreign('entrada_id')->references('id')->on('entradas');
             $table->timestamps();
-            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 
@@ -29,6 +31,6 @@ class CreateAutoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('autores');
+        Schema::dropIfExists('media');
     }
 }

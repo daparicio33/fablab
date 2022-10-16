@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProyectoRequest;
+use App\Models\Entrada;
+use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class ProyectoController extends Controller
 {
@@ -11,9 +15,15 @@ class ProyectoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
+        $proyectos = Proyecto::all();
+        return view('dashboard.proyectos.index',compact('proyectos'));
     }
 
     /**
@@ -24,6 +34,7 @@ class ProyectoController extends Controller
     public function create()
     {
         //
+        return view('dashboard.proyectos.create');
     }
 
     /**
@@ -32,9 +43,20 @@ class ProyectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProyectoRequest $request)
     {
         //
+        try {
+            $protecto = new Proyecto;
+            $protecto->create($request->all());
+            //code...
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('dashboard.proyectos.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('dashboard.proyectos.index')
+        ->with('info','se registro el proyecto correctamente');
     }
 
     /**
@@ -45,7 +67,10 @@ class ProyectoController extends Controller
      */
     public function show($id)
     {
-        //
+        //mostrar las entradas del post
+        $proyecto = Proyecto::findOrFail($id);
+        $entradas = Entrada::all();
+        return view('dashboard.entradas.index',compact('proyecto','entradas'));
     }
 
     /**
@@ -57,6 +82,8 @@ class ProyectoController extends Controller
     public function edit($id)
     {
         //
+        $proyecto = Proyecto::findOrFail($id);
+        return view('dashboard.proyectos.edit',compact('proyecto'));
     }
 
     /**
@@ -66,9 +93,20 @@ class ProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProyectoRequest $request, $id)
     {
         //
+        try {
+            //code...
+            $proyecto = Proyecto::findOrFail($id);
+            $proyecto->update($request->all());
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('dashboard.proyectos.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('dashboard.proyectos.index')
+        ->with('info','se actualizo el proyecto de forma correcta');
     }
 
     /**
@@ -80,5 +118,16 @@ class ProyectoController extends Controller
     public function destroy($id)
     {
         //
+        try {
+            //code...
+            $proyecto = Proyecto::findOrFail($id);
+            $proyecto->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('dashboard.proyectos.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('dashboard.proyectos.index')
+        ->with('info','se elmino el proyecto correctamente');
     }
 }

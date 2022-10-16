@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAdministradorAutorRequest;
+use App\Models\Autore;
 use App\Models\Proyecto;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class AdministradorAutorController extends Controller
 {
@@ -13,10 +17,15 @@ class AdministradorAutorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth'); 
+    }
     public function index()
     {
         //
-        return view('administradores.autores.index');
+        $autores = Autore::all();
+        return view('administradores.autores.index',compact('autores'));
     }
 
     /**
@@ -26,14 +35,10 @@ class AdministradorAutorController extends Controller
      */
     public function create()
     {
-        //
-        $users = User::orderBy('name','asc')
-        ->pluck('name','id')
-        ->toArray();
         $proyectos = Proyecto::orderBy('nombre','asc')
         ->pluck('nombre','id')
         ->toArray();
-        return view('administradores.autores.create',compact('users','proyectos'));
+        return view('administradores.autores.create',compact('proyectos'));
     }
 
     /**
@@ -42,9 +47,30 @@ class AdministradorAutorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdministradorAutorRequest $request)
     {
         //
+        try {
+            //primero creamos el cliente
+            DB::beginTransaction();
+            $user = new User;
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+            $autore = new Autore;
+            $autore->user_id = $user->id;
+            $autore->proyecto_id = $request->proyecto_id;
+            $autore->save();
+            DB::commit();
+        } catch (\Throwable $th) {
+            //throw $th;
+            DB::rollBack();
+            return Redirect::route('administradores.autores.index')
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('administradores.autores.index')
+        ->with('info','la informacion se guardo correctamente');
     }
 
     /**
@@ -67,6 +93,8 @@ class AdministradorAutorController extends Controller
     public function edit($id)
     {
         //
+        $autore = Autore::findOrFail($id);
+        return view('administradores.autores.edit',compact('autore'));
     }
 
     /**

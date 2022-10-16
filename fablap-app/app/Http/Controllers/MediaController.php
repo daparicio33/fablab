@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Autore;
-use App\Models\Proyecto;
+use App\Http\Requests\StoreMediaRequest;
 use Illuminate\Http\Request;
 
-class AutorProyectoController extends Controller
+class MediaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +15,6 @@ class AutorProyectoController extends Controller
     public function index()
     {
         //
-        $proyectos = Autore::where('user_id','=',auth()->id())
-        ->get();
-        return view('autores.proyectos.index',compact('proyectos'));
     }
 
     /**
@@ -29,7 +25,6 @@ class AutorProyectoController extends Controller
     public function create()
     {
         //
-        return ('crear proyecto');
     }
 
     /**
@@ -38,9 +33,10 @@ class AutorProyectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreMediaRequest $request)
     {
         //
+        dd($request);
     }
 
     /**

@@ -329,16 +329,11 @@ return [
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
         ],
-        ['header'=>'AUTORES'],
+        ['header'=>'Proyectos'],
         [
-            'text'=>'Proyectos',
+            'text'=>'Inicio',
             'icon'=>'fas fa-fw fa-share',
-            'url'=>'autores/proyectos'
-        ],
-        [
-            'text'=>'Entradas',
-            'icon'=>'fas fa-fw fa-share',
-            'url'=>'autores/entradas'
+            'url'=>'dashboard/proyectos'
         ],
         ['header'=>'ADMINISTRADORES'],
         [

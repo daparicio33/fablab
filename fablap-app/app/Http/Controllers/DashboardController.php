@@ -2,23 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Autore;
-use App\Models\Proyecto;
 use Illuminate\Http\Request;
 
-class AutorProyectoController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
-        $proyectos = Autore::where('user_id','=',auth()->id())
-        ->get();
-        return view('autores.proyectos.index',compact('proyectos'));
+        return view('dashboard.index');
     }
 
     /**
@@ -29,7 +29,7 @@ class AutorProyectoController extends Controller
     public function create()
     {
         //
-        return ('crear proyecto');
+        return view('dashboard.proyectos.create');
     }
 
     /**

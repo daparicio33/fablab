@@ -10,7 +10,8 @@ class Proyecto extends Model
     use HasFactory;
     protected $fillable = [
         'nombre',
+        'descripcion',
         'fecha',
-        'descripcion'
+        'user_id',
     ];
 }

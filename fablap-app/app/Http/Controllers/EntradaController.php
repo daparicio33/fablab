@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEntradaRequest;
+use App\Models\Entrada;
+use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class EntradaController extends Controller
 {
@@ -11,9 +15,15 @@ class EntradaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         //
+        $entradas = Entrada::all();
+        return view('dashboard.entradas.create',compact('entradas'));
     }
 
     /**
@@ -21,9 +31,12 @@ class EntradaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $proyecto = Proyecto::findOrFail($request->proyecto_id);
+        return view('dashboard.entradas.create',compact('proyecto'));
+        dd($proyecto);
     }
 
     /**
@@ -32,9 +45,20 @@ class EntradaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEntradaRequest $request)
     {
         //
+        try {
+            //code...
+            $entrada = new Entrada;
+            $entrada->create($request->all());
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('dashboard.proyectos.show',$request->proyecto_id)
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('dashboard.proyectos.show',$request->proyecto_id)
+        ->with('info','se guardo la informacion de la entrada correctamente');
     }
 
     /**
@@ -57,6 +81,8 @@ class EntradaController extends Controller
     public function edit($id)
     {
         //
+        $entrada = Entrada::findOrFail($id);
+        return view('dashboard.entradas.edit',compact('entrada'));
     }
 
     /**
@@ -66,9 +92,20 @@ class EntradaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreEntradaRequest $request, $id)
     {
         //
+        try {
+            //code...
+            $entrada = Entrada::findOrFail($id);
+            $entrada->update($request->all());
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('dashboard.proyectos.show',$entrada->proyecto_id)
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('dashboard.proyectos.show',$entrada->proyecto_id)
+        ->with('info','la informacion de la entrada se actualizo correctamente');
     }
 
     /**
@@ -79,6 +116,16 @@ class EntradaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            //code...
+            $entrada = Entrada::findOrFail($id);
+            $entrada->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::route('dashboard.proyectos.show',$entrada->proyecto_id)
+            ->with('error',$th->getMessage());
+        }
+        return Redirect::route('dashboard.proyectos.show',$entrada->proyecto_id)
+        ->with('info','la entrada se elimino correctamente');
     }
 }

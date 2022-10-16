@@ -1,11 +1,9 @@
 <?php
 
-use App\Http\Controllers\AdministradorAutorController;
-use App\Http\Controllers\AdministradorInicioController;
-use App\Http\Controllers\AdministsradorProyectoController;
-use App\Http\Controllers\AutorInicioController;
-use App\Http\Controllers\AutorProyectoController;
-use App\Http\Controllers\AutorProyectoEntradaController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\EntradaController;
+use App\Http\Controllers\MediaController;
+use App\Http\Controllers\ProyectoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,9 +28,18 @@ Auth::routes();
 Route::get('/', function () {
     return view('index');
 });
+//Rutas de los creadores del Fablab
+Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
+Route::resource('dashboard/proyectos',ProyectoController::class)
+->names('dashboard.proyectos');
+Route::resource('dashboard/entradas',EntradaController::class)
+->names('dashboard.entradas');
+Route::resource('dashboard/medias',MediaController::class)
+->names('dashboard.medias');
+
 
 //Rutas Autores
-Route::get('autores',[AutorInicioController::class,'index'])
+/* Route::get('autores',[AutorInicioController::class,'index'])
 ->name('autores.inicio');
 Route::resource('autores/entradas',AutorProyectoEntradaController::class)
 ->names('autores.entradas');
@@ -45,4 +52,4 @@ Route::get('administradores',[AdministradorInicioController::class,'index'])
 Route::resource('administradores/autores',AdministradorAutorController::class)
 ->names('administradores.autores');
 Route::resource('administradores/proyectos',AdministsradorProyectoController::class)
-->names('administradores.proyectos');
+->names('administradores.proyectos'); */

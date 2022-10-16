@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreAdministradorProyectoRequest;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -43,7 +44,7 @@ class AdministsradorProyectoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdministradorProyectoRequest $request)
     {
         //
         try {
@@ -90,7 +91,7 @@ class AdministsradorProyectoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreAdministradorProyectoRequest $request, $id)
     {
         //
         try {

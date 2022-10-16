@@ -22,48 +22,35 @@
     @endif
 @stop
 @section('content')
-{{--     <div class="table-responsive-sm">
+    <div class="table-responsive-sm">
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Fecha</th>
-                    <th scope="col">Opciones</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Proyecto</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($proyectos as $proyecto)
+                @foreach ($autores as $autore)
                     <tr>
-                        <td>{{ $proyecto->nombre }}</td>
-                        <td>{{ date('d-m-Y',strtotime($proyecto->fecha)) }}</td>
+                        <td>{{ $autore->user->name }}</td>
+                        <td>{{ $autore->user->email }}</td>
+                        <td>{{ $autore->proyecto->nombre }}</td>
                         <td style="width: 170px; text-align: center">
-                            <a href="{{ route('administradores.proyectos.edit',$proyecto->id) }}">
+                            <a href="{{ route('administradores.autores.edit',$autore->id) }}">
                                 <button class="btn btn-info">
                                     <i class="far fa-edit"></i> Editar
                                 </button>
                             </a>
-                            <a data-target="#modal-delete-{{$proyecto->id}}" data-toggle="modal" href="" class="btn btn-danger" title="eliminar matricula">
+                            <a data-target="#modal-delete-{{$autore->id}}" data-toggle="modal" href="" class="btn btn-danger" title="eliminar matricula">
                                 <i class="fas fa-trash-alt"></i>
                             </a>
                         </td>
-                        @include('administradores.proyectos.modal')
+                        {{-- @include('administradores.proyectos.modal') --}}
                     </tr>
                 @endforeach
             </tbody>
         </table>
-    </div> --}}
-@stop
-@section('js')
-    <script> 
-        $(document).ready(function(){
-        setTimeout(() => {
-            $("#info").hide();
-        }, 12000);
-        });
-        $(document).ready(function(){
-            setTimeout(() => {
-            $("#error").hide();
-        }, 12000);
-        });
-    </script>
+    </div>
 @stop

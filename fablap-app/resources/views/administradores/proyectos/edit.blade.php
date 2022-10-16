@@ -26,10 +26,25 @@
                 $table->longText('descripcion'); --}}
                 {!! Form::label(null, 'Nombre', [null]) !!}
                 {!! Form::text('nombre', null, ['class'=>'form-control']) !!}
+                @error('nombre')
+                    <small class="alert alert-danger d-block p-1 mt-1" role="alert">
+                        <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
+                    </small>
+                @enderror
                 {!! Form::label(null, 'Fecha', [null]) !!}
                 {!! Form::date('fecha', null, ['class'=>'form-control']) !!}
+                @error('fecha')
+                    <small class="alert alert-danger d-block p-1 mt-1" role="alert">
+                        <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
+                    </small>
+                @enderror
                 {!! Form::label(null, 'Descripcion', [null]) !!}
                 {!! Form::textarea('descripcion', null, ['class'=>'form-control']) !!}
+                @error('descripcion')
+                    <small class="alert alert-danger d-block p-1 mt-1" role="alert">
+                        <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
+                    </small>
+                @enderror
                 <button type="submit" id="btn" class="btn btn-primary mt-3">
                     <i class="fas fa-download"></i>
                     Guardar

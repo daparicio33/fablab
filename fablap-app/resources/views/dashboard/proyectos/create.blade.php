@@ -1,8 +1,8 @@
 @extends('adminlte::page')
-@section('title', 'Crear Proyecto')
+@section('title', 'Registrar Proyecto')
 @section('content_header')
     <h1>
-        <a href="{{ route('administradores.proyectos.index') }}" class="text-danger">
+        <a href="{{ route('dashboard.proyectos.index') }}" class="text-danger">
             <i class="fas fa-hand-point-left"></i>
         </a>
         Registar nuevo proyecto
@@ -14,7 +14,7 @@
     </p>
 @stop
 @section('content')
-{!! Form::open(['route'=>'administradores.proyectos.store','id'=>'frm']) !!}
+{!! Form::open(['route'=>'dashboard.proyectos.store','id'=>'frm']) !!}
    <div class="row">
     <div class="col-sm-8 col-ml-7 col-xl-5 mx-auto">
         <div class="card text-start">
@@ -41,6 +41,7 @@
                         <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
                     </small>
                 @enderror
+                {!! Form::hidden('user_id', auth()->id(), [null]) !!}
                 <button type="submit" id="btn" class="btn btn-primary mt-3">
                     <i class="fas fa-download"></i>
                     Guardar

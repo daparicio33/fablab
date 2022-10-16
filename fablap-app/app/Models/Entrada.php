@@ -10,8 +10,8 @@ class Entrada extends Model
     use HasFactory;
     protected $fillable = [
         'titulo',
-        'descripcion',
         'fecha',
+        'descripcion',
         'proyecto_id'
     ];
 }

@@ -12,6 +12,26 @@ function mostrarContrasena(){
         btn.setAttribute('class','far fa-eye')
     }
 }
+function cambiartipo(){
+    var tipo = document.getElementById("tipo").value;
+    var url = document.getElementById("url");
+    if(tipo == "imagen"){
+        //cambiar los atributos del objeto
+        url.removeAttribute('type');
+        url.setAttribute('type','file')
+    }
+    if(tipo == "video"){
+        //cambiar los atributos del objeto
+        url.removeAttribute('type');
+        url.setAttribute('type','text')
+        url.setAttribute('placeholder','ingrese url del video');
+    }
+    if(tipo == "archivo"){
+        //cambiar los atributos del objeto
+        url.removeAttribute('type');
+        url.setAttribute('type','file')
+    }
+}
 //Mensages de Confirmacion
 $(document).ready(function(){
     setTimeout(() => {
