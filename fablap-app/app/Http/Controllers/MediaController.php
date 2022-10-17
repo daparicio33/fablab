@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMediaRequest;
+use App\Models\Entrada;
+use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class MediaController extends Controller
 {
@@ -36,7 +39,36 @@ class MediaController extends Controller
     public function store(StoreMediaRequest $request)
     {
         //
-        dd($request);
+        try {
+            //code...
+            if($request->hasFile('url'))
+            {
+                //guardando los archivos
+                $url = $request->file('url')->store('public');
+                //guardar el registro
+                $media = new Media;
+                $media->url = $url;
+                $media->descripcion = $request->descripcion;
+                $media->tipo = $request->tipo;
+                $media->entrada_id = $request->entrada_id;
+                $media->save();
+            }else{
+                $media = new Media;
+                $media->url = $request->url;
+                $media->descripcion = $request->descripcion;
+                $media->tipo = $request->tipo;
+                $media->entrada_id = $request->entrada_id;
+                $media->save();
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            
+            return Redirect::to('dashboard/proyectos/'.$request->proyecto_id)
+            ->with('error',$th->getMessage());
+
+        }
+        return Redirect::to('dashboard/proyectos/'.$request->proyecto_id)
+        ->with('info','se guardo la imagen correctamente');
     }
 
     /**

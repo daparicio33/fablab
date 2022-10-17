@@ -22,8 +22,8 @@ class EntradaController extends Controller
     public function index()
     {
         //
-        $entradas = Entrada::all();
-        return view('dashboard.entradas.create',compact('entradas'));
+        /* $entradas = Entrada::all();
+        return view('dashboard.entradas.create',compact('entradas')); */
     }
 
     /**

@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Media extends Model
 {
     use HasFactory;
+    public function entrada(){
+        return $this->belongsTo(Entrada::class);
+    }
 }

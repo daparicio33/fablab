@@ -47,3 +47,12 @@ $(document).ready(function(){
 $('#frm').submit(function(event){
     $("#btn").attr("disabled",true);
 });
+//imagen preview
+function previewimage(event,querySelector){
+    const input = event.target;
+    $imgPreview = document.querySelector(querySelector);
+    if(!input.files.length) return
+    file = input.files[0];
+    objectURL = URL.createObjectURL(file);
+    $imgPreview.src = objectURL;
+}

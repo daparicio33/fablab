@@ -14,4 +14,7 @@ class Entrada extends Model
         'descripcion',
         'proyecto_id'
     ];
+    public function medias(){
+        return $this->hasMany(Media::class);
+    }
 }

@@ -24,7 +24,6 @@ class StoreMediaRequest extends FormRequest
     public function rules()
     {
         return [
-            'url'=>'required',
             'descripcion'=>'required',
             'tipo'=>'required',
             'entrada_id'=>'required'

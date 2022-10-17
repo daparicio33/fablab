@@ -57,6 +57,34 @@
                         @include('dashboard.entradas.multimedia')
                         @include('dashboard.entradas.modal')
                     </tr>
+                    <tr>
+                        <td colspan="4">
+                            Imagenes
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="row">
+                                @foreach ($entrada->medias as $media)
+                                @if ($media->tipo == 'imagen')
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <div class="card" style="width: 14rem;">
+                                        <img src="{{ Storage::url($media->url) }}" class="card-img-top" alt="imagen no disponible">
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{ $media->tipo }}</h5>
+                                        <p class="card-text">
+                                            {{ $media->descripcion }}
+                                        </p>
+                                        <a href="#" class="btn btn-danger">Eliminar</a>
+                                        </div>
+                                    </div>
+                                </div>  
+                                @endif
+                                    
+                                @endforeach
+                            </div>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
