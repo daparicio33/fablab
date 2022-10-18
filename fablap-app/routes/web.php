@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntradaController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\ProyectoController;
 use Illuminate\Support\Facades\Auth;
@@ -21,13 +22,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 //rutas de creacion de panel para los usuarios
-
 //rutas USUARIOS
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/',[HomeController::class,'index'])->name('home');
+
 //Rutas de los creadores del Fablab
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
 Route::resource('dashboard/proyectos',ProyectoController::class)

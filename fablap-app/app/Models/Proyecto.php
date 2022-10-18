@@ -14,4 +14,10 @@ class Proyecto extends Model
         'fecha',
         'user_id',
     ];
+    public function entradas(){
+        return $this->hasMany(Entrada::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

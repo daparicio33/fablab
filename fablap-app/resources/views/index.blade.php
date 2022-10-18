@@ -6,10 +6,10 @@
     <div class="container position-relative">
       <div class="row gy-5" data-aos="fade-in">
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center text-center text-lg-start">
-          <h2>Welcome to <span>Impact</span></h2>
-          <p>Sed autem laudantium dolores. Voluptatem itaque ea consequatur eveniet. Eum quas beatae cumque eum quaerat.</p>
+          <h2>Bienvenido <span>Laboratorio de Fabricación Digital</span></h2>
+          <p>Ven y forma parte de esta nueva forma de hacer tus ideas, en nuestro laboratorio podras dar rienda suelta a tu creatividad, aca todo es posible.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
-            <a href="#about" class="btn-get-started">Get Started</a>
+            <a href="#about" class="btn-get-started">Informate</a>
             <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
           </div>
         </div>
@@ -62,4 +62,47 @@
     </div>
   </section>
   <!-- End Hero Section -->
+<!-- ======= Recent Blog Posts Section ======= -->
+<section id="recent-posts" class="recent-posts sections-bg">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-header">
+      <h2>Proyectos Fab IDEX Perú Japón</h2>
+      <p>da un vistazo a nuestos proyectos mas recientes ...</p>
+    </div>
+
+    <div class="row gy-4">
+      
+      @foreach ($proyectos as $proyecto)
+        <!-- Start post list item -->
+        <div class="col-xl-4 col-md-6">
+          <article>
+            <div class="post-img">            
+              <img src="{{ Storage::url($proyecto->entradas[0]->medias[0]->url) }}" alt="" class="img-fluid">
+            </div>
+            <p class="post-category">{{ end($proyecto->entradas)  }}</p>
+            <h2 class="title">
+              <a href="blog-details.html">{{ $proyecto->nombre }}</a>
+            </h2>
+            <div class="d-flex align-items-center">
+              <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+              <div class="post-meta">
+                <p class="post-author">{{ $proyecto->user->name }}</p>
+                <p class="post-date">
+                  <time>{{ date('d-M-Y',strtotime($proyecto->fecha)) }}</time>
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+        <!-- End post list item -->
+      @endforeach
+    </div>
+    <!-- End recent posts list -->
+  </div>
+</section>
+<!-- End Recent Blog Posts Section -->
+
+
+
 @endsection

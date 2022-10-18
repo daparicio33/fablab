@@ -17,4 +17,7 @@ class Entrada extends Model
     public function medias(){
         return $this->hasMany(Media::class);
     }
+    public function proyecto(){
+        return $this->belongsTo(Proyecto::class);
+    }
 }
