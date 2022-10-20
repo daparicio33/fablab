@@ -18,6 +18,7 @@ class CreateProyectosTable extends Migration
             $table->string('nombre');
             $table->longText('descripcion');
             $table->date('fecha');
+            $table->string('url')->default('public/defaultLogo.png');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

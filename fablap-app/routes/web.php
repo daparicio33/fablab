@@ -25,6 +25,7 @@ Auth::routes();
 //rutas de creacion de panel para los usuarios
 //rutas USUARIOS
 Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('proyectos/{id}',[HomeController::class,'show'])->name('home.proyectos.show');
 
 //Rutas de los creadores del Fablab
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
@@ -34,7 +35,9 @@ Route::resource('dashboard/entradas',EntradaController::class)
 ->names('dashboard.entradas');
 Route::resource('dashboard/medias',MediaController::class)
 ->names('dashboard.medias');
-
+Route::get('calculadora',function(){
+    return view('calculadora');
+});
 
 //Rutas Autores
 /* Route::get('autores',[AutorInicioController::class,'index'])

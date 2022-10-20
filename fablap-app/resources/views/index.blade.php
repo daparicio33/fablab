@@ -82,7 +82,7 @@
             </div>
             <p class="post-category">{{ end($proyecto->entradas)  }}</p>
             <h2 class="title">
-              <a href="blog-details.html">{{ $proyecto->nombre }}</a>
+              <a href="{{ route('home.proyectos.show',$proyecto->id) }}">{{ $proyecto->nombre }}</a>
             </h2>
             <div class="d-flex align-items-center">
               <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
