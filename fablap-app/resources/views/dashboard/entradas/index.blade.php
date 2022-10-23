@@ -28,6 +28,7 @@
         <table class="table">
             <thead>
                 <tr>
+                    <th>#</th>
                     <th scope="col">Titulo</th>
                     <th scope="col">Fecha</th>
                     <th scope="col">Descripcion</th>
@@ -36,6 +37,7 @@
             <tbody>
                 @foreach ($entradas as $entrada)
                     <tr>
+                        <td class="font-weight-bold">{{ $loop->iteration }}</td>
                         <td>{{ $entrada->titulo }}</td>
                         <td>{{ date('d-m-Y',strtotime($proyecto->fecha)) }}</td>
                         <td>{{ $entrada->descripcion }}</td>
@@ -57,6 +59,7 @@
                         @include('dashboard.entradas.multimedia')
                         @include('dashboard.entradas.modal')
                     </tr>
+                    {{-- lista de imagenes --}}
                     <tr>
                         <td colspan="4">
                             Imagenes
@@ -68,23 +71,93 @@
                                 @foreach ($entrada->medias as $media)
                                 @if ($media->tipo == 'imagen')
                                 <div class="col-sm-12 col-md-6 col-lg-3">
-                                    <div class="card" style="width: 14rem;">
+                                    <div class="card">
                                         <img src="{{ Storage::url($media->url) }}" class="card-img-top" alt="imagen no disponible">
                                         <div class="card-body">
-                                        <h5 class="card-title">{{ $media->tipo }}</h5>
+                                        <h6 class="card-title">{{ $media->tipo }}</h6>
                                         <p class="card-text">
                                             {{ $media->descripcion }}
                                         </p>
-                                        <a href="#" class="btn btn-danger">Eliminar</a>
+                                        <a href="" data-target="#modal-delete-{{$media->id}}" data-toggle="modal" class="btn btn-danger" title="eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
+                                @include('dashboard.medias.mdelete')
                                 @endif
-                                    
                                 @endforeach
                             </div>
                         </td>
                     </tr>
+                    {{-- fin de la lista de las imagenes --}}
+                    {{-- inicio del video --}}
+                    <tr>
+                        <td colspan="4">
+                            Videos
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="row">
+                                @foreach ($entrada->medias as $media)
+                                    @if ($media->tipo == 'video')
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="ratio ratio-16x9">
+                                                <iframe src="{{ $media->url }}" title="YouTube video" style="width: 100%" allowfullscreen></iframe>
+                                            </div>
+                                            <div class="card-body">
+                                            <h6 class="card-title">{{ $media->tipo }}</h6>
+                                            <p class="card-text">
+                                                {{ $media->descripcion }}
+                                            </p>
+                                            <a href="" data-target="#modal-delete-{{$media->id}}" data-toggle="modal" class="btn btn-danger" title="eliminar">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @include('dashboard.medias.mdelete')
+                                    @endif
+                                @endforeach
+                            </div>
+                        </td>
+                    </tr>
+                    {{-- fin del video --}}
+                    {{-- inicio de la lista de archivos --}}
+                    <tr>
+                        <td colspan="4">
+                            Archivos
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <div class="row">
+                                @foreach ($entrada->medias as $media)
+                                @if ($media->tipo == 'archivo')
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <div class="card">
+                                        <img src="{{ Storage::url('public/defaultFile.png') }}" class="card-img-top" alt="imagen no disponible">
+                                        <div class="card-body">
+                                        <h5 class="card-title">{{ $media->tipo }}</h5>
+                                        <p class="card-text">
+                                            {{ $media->descripcion }}
+                                            <a href="{{ Storage::url($media->url) }}">descargar aca</a>
+                                        </p>
+                                        <a href="" data-target="#mdelete-{{$media->id}}" data-toggle="modal"  class="btn btn-danger" title="eliminar">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @include('dashboard.medias.mdelete')
+                                @endif
+                                @endforeach
+                            </div>
+                        </td>
+                    </tr>
+                    {{-- fin de la lista de archivos --}}
                 @endforeach
             </tbody>
         </table>

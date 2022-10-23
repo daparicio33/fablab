@@ -19,12 +19,14 @@ class DatabaseSeeder extends Seeder
         $usuario->name = "Davis Williams Aparicio Palomino";
         $usuario->email = "daparicio@idexperujapon.edu.pe";
         $usuario->password = bcrypt('B3n3tt0n_');
+        $usuario->sexo="Masculino";
         $usuario->tipo = "Superadmin";
         $usuario->save();
         $usuario2 = new User;
         $usuario2->name = "Dave Aparicio Palomino";
         $usuario2->email = "dwaparicicio@gmail.com";
         $usuario2->password = bcrypt('B3n3tt0n_');
+        $usuario2->sexo="Masculino";
         $usuario2->tipo = "Superadmin";
         $usuario2->save();
     }

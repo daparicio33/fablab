@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->string('foto')->default('public/defaultPic.png');
+            $table->string('sexo')->check(['Masculino','Femenino']);
             $table->string('tipo')->default('Autor');
             $table->timestamps();
             $table->collation = 'utf8mb4_spanish_ci';

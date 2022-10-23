@@ -70,8 +70,9 @@ class ProyectoController extends Controller
         //mostrar las entradas del post
         $proyecto = Proyecto::findOrFail($id);
         $entradas = Entrada::where('proyecto_id','=',$proyecto->id)
+        ->orderBy('id','desc')
         ->get();
-        return view('dashboard.entradas.index',compact('proyecto','entradas'));
+        return view('dashboard.entradas.show',compact('proyecto','entradas'));
     }
 
     /**

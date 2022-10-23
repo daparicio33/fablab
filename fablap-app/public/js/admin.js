@@ -12,9 +12,9 @@ function mostrarContrasena(){
         btn.setAttribute('class','far fa-eye')
     }
 }
-function cambiartipo(){
-    var tipo = document.getElementById("tipo").value;
-    var url = document.getElementById("url");
+function cambiartipo(id){
+    var tipo = document.getElementById("tipo"+id).value;
+    var url = document.getElementById("url"+id);
     if(tipo == "imagen"){
         //cambiar los atributos del objeto
         url.removeAttribute('type');

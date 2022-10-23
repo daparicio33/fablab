@@ -28,8 +28,15 @@ class HomeController extends Controller
         $proyectos = Proyecto::all();
         return view('index',compact('proyectos'));
     }
-    public function show($id){
+    public function proyectoShow($id){
         $proyecto = Proyecto::findOrFail($id);
-        return view('proyectos.index',compact('proyecto'));
+        return view('proyectos.show',compact('proyecto'));
+    }
+    public function proyectoIndex(){
+        $proyectos = Proyecto::all();
+        return view('proyectos.index',compact('proyectos'));
+    }
+    public function nosotros(){
+        return view ('nosotros');
     }
 }

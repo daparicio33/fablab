@@ -10,7 +10,7 @@
           <p>Ven y forma parte de esta nueva forma de hacer tus ideas, en nuestro laboratorio podras dar rienda suelta a tu creatividad, aca todo es posible.</p>
           <div class="d-flex justify-content-center justify-content-lg-start">
             <a href="#about" class="btn-get-started">Informate</a>
-            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Ver Video</span></a>
           </div>
         </div>
         <div class="col-lg-6 order-1 order-lg-2">
@@ -78,14 +78,14 @@
         <div class="col-xl-4 col-md-6">
           <article>
             <div class="post-img">            
-              <img src="{{ Storage::url($proyecto->entradas[0]->medias[0]->url) }}" alt="" class="img-fluid">
+              <img src="{{ Storage::url($proyecto->url) }}" alt="" class="img-fluid">
             </div>
             <p class="post-category">{{ end($proyecto->entradas)  }}</p>
             <h2 class="title">
               <a href="{{ route('home.proyectos.show',$proyecto->id) }}">{{ $proyecto->nombre }}</a>
             </h2>
             <div class="d-flex align-items-center">
-              <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0">
+              <img src="{{ Storage::url($proyecto->user->foto) }}" alt="" class="img-fluid post-author-img flex-shrink-0">
               <div class="post-meta">
                 <p class="post-author">{{ $proyecto->user->name }}</p>
                 <p class="post-date">

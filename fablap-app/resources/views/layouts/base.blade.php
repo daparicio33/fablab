@@ -57,7 +57,7 @@
   <header id="header" class="header d-flex align-items-center">
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="{{ route('home') }}" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <img src="{{ asset('assets/img/logoIDEXlargo.png') }}" alt="">
         {{-- <h1>Impact<span>.</span></h1> --}}
@@ -65,9 +65,9 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{{ route('home') }}">Inicio</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="{{ route('home.proyectos') }}">Proyectos</a></li>
+          <li><a href="{{ route('home.nosotros') }}">Nosotros</a></li>
+          {{-- <li><a href="#portfolio">Portfolio</a></li>
           <li><a href="#team">Team</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -86,8 +86,13 @@
               <li><a href="#">Drop Down 3</a></li>
               <li><a href="#">Drop Down 4</a></li>
             </ul>
-          </li>
+          </li> --}}
           <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="{{ route('dashboard.index') }}" class="btn btn-primary" style="padding: 7px 10px">
+              <i class="bi bi-box-arrow-right fs-5"> </i> &nbsp Ingresar 
+            </a>
+          </li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -100,7 +105,6 @@
   @yield('slider')
   
   <main id="main">
-    @include('sweetalert::alert')
     @yield('cuerpo')
 
   </main><!-- End #main -->
@@ -127,11 +131,12 @@
         <div class="col-lg-2 col-6 footer-links">
           <h4>Enlaces</h4>
           <ul>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
+            <li><a href="{{ route('home') }}">Inicio</a></li>
+            <li><a href="{{ route('home.proyectos') }}">Proyectos</a></li>
+            <li><a href="{{ route('home.nosotros') }}">Nosotros</a></li>
+            {{-- <li><a href="#">Services</a></li>
             <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Privacy policy</a></li> --}}
           </ul>
         </div>
 

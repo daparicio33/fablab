@@ -111,8 +111,19 @@ class MediaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
         //
+        try {
+            //code...
+            $media = Media::findOrFail($id);
+            $media->delete();
+        } catch (\Throwable $th) {
+            //throw $th;
+            return Redirect::to('dashboard/proyectos/'.$request->proyecto_id)
+            ->with('erro',$th->getMessage());
+        }
+        return Redirect::to('dashboard/proyectos/'.$request->proyecto_id)
+        ->with('info','la multimedia se elimino correctamente');
     }
 }

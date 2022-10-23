@@ -15,7 +15,7 @@
                 <div class="row mb-2">
                   <div class="col-sm-12 col-md-6">
                     <label for="">Tipo</label>
-                    <select class="custom-select" id="tipo" name="tipo" onchange="cambiartipo()" >
+                    <select class="custom-select" id="tipo{{ $entrada->id }}" name="tipo" onchange="cambiartipo({{ $entrada->id }})" >
                         <option value="imagen">Imagen</option>
                         <option value="archivo">Archivo</option>
                         <option value="video">Video</option>
@@ -23,7 +23,7 @@
                   </div>
                 </div>
                   <label for="">Recurso</label>
-                  <input type="file" name="url" id="url" class="form-control" onchange="previewimage(event,'#imgpreview')"  required>
+                  <input type="file" name="url" id="url{{ $entrada->id }}" class="form-control" onchange="previewimage(event,'#imgpreview{{ $entrada->id }}')"  required>
                   <label for="">Descripcion</label>
                   {!! Form::hidden('proyecto_id', $proyecto->id, [null]) !!}
                   {!! Form::textarea('descripcion', null, ['class'=>'form-control','required','rows'=>3]) !!}
@@ -31,7 +31,7 @@
               </div>
             </div>
             <div class="col-sm-12 col-md-4">
-              <img src="" id="imgpreview" width="90%" alt="imagen no disponible">
+              <img src="" id="imgpreview{{ $entrada->id }}" width="90%" alt="imagen no disponible">
             </div>
           </div>
 
