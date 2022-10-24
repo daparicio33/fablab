@@ -21,6 +21,7 @@ class CreateEntradasTable extends Migration
             $table->unsignedBigInteger('proyecto_id');
             $table->foreign('proyecto_id')->references('id')->on('proyectos');
             $table->timestamps();
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

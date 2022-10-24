@@ -21,6 +21,7 @@ class CreateMediaTable extends Migration
             $table->unsignedBigInteger('entrada_id');
             $table->foreign('entrada_id')->references('id')->on('entradas');
             $table->timestamps();
+            $table->collation = 'utf8mb4_spanish_ci';
         });
     }
 

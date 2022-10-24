@@ -22,7 +22,9 @@ class ProyectoController extends Controller
     public function index()
     {
         //
-        $proyectos = Proyecto::all();
+        $proyectos = Proyecto::where('user_id','=',auth()->id())
+        ->orderBy('id','desc')
+        ->get();
         return view('dashboard.proyectos.index',compact('proyectos'));
     }
 
@@ -72,7 +74,7 @@ class ProyectoController extends Controller
         $entradas = Entrada::where('proyecto_id','=',$proyecto->id)
         ->orderBy('id','desc')
         ->get();
-        return view('dashboard.entradas.show',compact('proyecto','entradas'));
+        return view('dashboard.entradas.index',compact('proyecto','entradas'));
     }
 
     /**

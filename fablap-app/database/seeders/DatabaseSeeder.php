@@ -29,5 +29,7 @@ class DatabaseSeeder extends Seeder
         $usuario2->sexo="Masculino";
         $usuario2->tipo = "Superadmin";
         $usuario2->save();
+        //creamos los permisos y los roles
+        
     }
 }
