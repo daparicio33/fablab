@@ -49,8 +49,18 @@ class ProyectoController extends Controller
     {
         //
         try {
-            $protecto = new Proyecto;
-            $protecto->create($request->all());
+            $proyecto = new Proyecto;
+            if($request->hasFile('url')){
+                $url = $request->file('url')->store('public');
+                $proyecto->nombre = $request->nombre;
+                $proyecto->descripcion = $request->descripcion;
+                $proyecto->fecha = $request->fecha;
+                $proyecto->user_id = auth()->id();
+                $proyecto->url = $url;
+                $proyecto->save();
+            }else{
+                $proyecto->create($request->all());
+            }
             //code...
         } catch (\Throwable $th) {
             //throw $th;
@@ -103,7 +113,17 @@ class ProyectoController extends Controller
         try {
             //code...
             $proyecto = Proyecto::findOrFail($id);
-            $proyecto->update($request->all());
+            if($request->hasFile('url')){
+                $url = $request->file('url')->store('public');
+                $proyecto->nombre = $request->nombre;
+                $proyecto->descripcion = $request->descripcion;
+                $proyecto->fecha = $request->fecha;
+                $proyecto->user_id = auth()->id();
+                $proyecto->url = $url;
+                $proyecto->update();
+            }else{
+                $proyecto->update($request->all());
+            }
         } catch (\Throwable $th) {
             //throw $th;
             return Redirect::route('dashboard.proyectos.index')

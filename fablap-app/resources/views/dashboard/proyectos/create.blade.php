@@ -14,9 +14,9 @@
     </p>
 @stop
 @section('content')
-{!! Form::open(['route'=>'dashboard.proyectos.store','id'=>'frm']) !!}
+{!! Form::open(['route'=>'dashboard.proyectos.store','id'=>'frm','enctype'=>'multipart/form-data']) !!}
    <div class="row">
-    <div class="col-sm-8 col-ml-7 col-xl-5 mx-auto">
+    <div class="col-sm-12 col-ml-5 col-xl-5">
         <div class="card text-start">
           <div class="card-body">
             <div class="form-group">
@@ -49,6 +49,16 @@
             </div>
           </div>
         </div>
+    </div>
+    <div class="col-sm-12 col-ml-7 col-xl-7">
+        <x-adminlte-input-file onchange="previewimage(event,'#imgpreview')" name="url" igroup-size="sm" placeholder="Elige una imagen...">
+            <x-slot name="prependSlot">
+                <div class="input-group-text bg-lightblue">
+                    <i class="fas fa-upload"></i>
+                </div>
+            </x-slot>
+        </x-adminlte-input-file>
+        <img id='imgpreview' style="max-width: 90%" src="{{ Storage::url('defaultLogo.png') }}" class="rounded mx-auto d-block" alt="...">
     </div>
    </div>
 {!! Form::close() !!}

@@ -14,7 +14,7 @@
     </p>
 @stop
 @section('content')
-{!! Form::open(['route'=>'dashboard.entradas.store','id'=>'frm']) !!}
+{!! Form::open(['route'=>'dashboard.entradas.store','id'=>'frm','enctype'=>'multipart/form-data']) !!}
    <div class="row">
     <div class="col-sm-8 col-ml-7 col-xl-5 mx-auto">
         <div class="card text-start">

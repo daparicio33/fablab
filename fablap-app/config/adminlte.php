@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'IDEXPJ',
+    'title' => 'Fab Lab IDEX- PJ',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -64,7 +64,7 @@ return [
     */
 
     'logo' => '<b>FabLab</b> - IDEX"PJ"',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/logofab.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -86,7 +86,7 @@ return [
     'auth_logo' => [
         'enabled' => false,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logofab.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
@@ -109,7 +109,7 @@ return [
     'preloader' => [
         'enabled' => true,
         'img' => [
-            'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+            'path' => 'vendor/adminlte/dist/img/logofab.png',
             'alt' => 'AdminLTE Preloader Image',
             'effect' => 'animation__shake',
             'width' => 60,
@@ -335,16 +335,21 @@ return [
             'icon'=>'fas fa-fw fa-share',
             'url'=>'dashboard/proyectos'
         ],
-        ['header'=>'ADMINISTRADORES'],
         [
-            'text'=>'Autores',
+            'header'=>'ADMINISTRADORES',
+            'can'=>'dashboard.administrators.index'
+        ],
+        [
+            'text'=>'Inicio',
             'icon'=>'fas fa-fw fa-share',
-            'url'=>'administradores/autores'
+            'url'=>'dashboard/administrators',
+            'can'=>'dashboard.administrators.index'
         ],
         [
             'text'=>'Proyectos',
             'icon'=>'fas fa-fw fa-share',
-            'url'=>'administradores/proyectos'
+            'url'=>'administradores/proyectos',
+            'can'=>'dashboard.administrators.index'
         ],
         /* [
             'text'    => 'multilevel',

@@ -43,7 +43,7 @@ class MediaController extends Controller
             //code...
             if($request->hasFile('url'))
             {
-                //guardando los archivos
+                //guardando los archivoss
                 $url = $request->file('url')->store('public');
                 //guardar el registro
                 $media = new Media;

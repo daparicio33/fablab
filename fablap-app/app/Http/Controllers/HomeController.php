@@ -25,7 +25,8 @@ class HomeController extends Controller
     public function index()
     {
         //vamos a mandarlos los proyectos
-        $proyectos = Proyecto::all();
+        $proyectos = Proyecto::orderBy('id','desc')
+        ->get();
         return view('index',compact('proyectos'));
     }
     public function proyectoShow($id){
@@ -33,10 +34,14 @@ class HomeController extends Controller
         return view('proyectos.show',compact('proyecto'));
     }
     public function proyectoIndex(){
-        $proyectos = Proyecto::all();
+        $proyectos = Proyecto::orderBy('id','desc')
+        ->get();
         return view('proyectos.index',compact('proyectos'));
     }
     public function nosotros(){
         return view ('nosotros');
+    }
+    public function contacto(){
+        return view('contacto');
     }
 }

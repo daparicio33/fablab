@@ -9,8 +9,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
   <!-- Favicons -->
-  <link href="{{ asset('assets/img/favicon_idexpng') }}" rel="icon">
-  <link href="{{ asset('assets/img/favicon_idex.png') }}" rel="apple-touch-icon">
+  <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/img/favicon.png') }}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +59,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
       <a href="{{ route('home') }}" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="{{ asset('assets/img/logoIDEXlargo.png') }}" alt="">
+        <img src="{{ asset('assets/img/logofablabnew.png') }}" alt="">
         {{-- <h1>Impact<span>.</span></h1> --}}
       </a>
       <nav id="navbar" class="navbar">
@@ -87,7 +87,7 @@
               <li><a href="#">Drop Down 4</a></li>
             </ul>
           </li> --}}
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="{{ route('home.contacto') }}">Contacto</a></li>
           <li>
             <a href="{{ route('dashboard.index') }}" class="btn btn-primary" style="padding: 7px 10px">
               <i class="bi bi-box-arrow-right fs-5"> </i> &nbsp Ingresar 
@@ -103,10 +103,8 @@
   </header><!-- End Header -->
   <!-- End Header -->
   @yield('slider')
-  
   <main id="main">
     @yield('cuerpo')
-
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -115,7 +113,7 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
-          <a href="index.html" class="logo d-flex align-items-center">
+          <a href="{{ route('home') }}" class="logo d-flex align-items-center">
             <span>IDEX Perú Japón</span>
           </a>
           <p>FAMILIA TECNOLÓGICA</p> 

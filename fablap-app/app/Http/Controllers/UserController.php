@@ -86,10 +86,18 @@ class UserController extends Controller
             $user->foto = $foto;
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->facebook = $request->facebook;
+            $user->instagram = $request->instagram;
+            $user->youtube = $request->youtube;
+            $user->descripcion = $request->descripcion;
             $user->save();
         }else{
             $user->name = $request->name;
             $user->email = $request->email;
+            $user->facebook = $request->facebook;
+            $user->instagram = $request->instagram;
+            $user->youtube = $request->youtube;
+            $user->descripcion = $request->descripcion;
             $user->save();
         }
         //code...

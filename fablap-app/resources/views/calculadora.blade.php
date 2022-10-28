@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <style>
+    {{-- <style>
         table{
             margin-top: 50px;
             margin-left: auto;
@@ -31,9 +31,51 @@
             font-size: 1.5rem;
             margin-bottom: 10px;
         }
+    </style> --}}
+    <style>
+        a{
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
+    <h1>Lista de usuarios</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>EDAD</th>
+                <th>Id</th>
+                <th>name</th>
+                <th>Correo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($users as $user)
+                <tr>
+                    <td><input id="edadcita{{ $user->id }}" value=0 type="text"></td>
+                    <td>{{ $user->id }}</td>
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td>
+                        <a onclick="sumar({{ $user->id }})">MAS +</a>
+                        <a onclick="restar({{ $user->id }})">MENOS -</a>
+                        <a   onClick="mostrar({{ $user->id }})" class="btn btn-danger">ELIMINAR</a>
+                        <div id="contenedor{{ $user->id }}" style="display: none">
+                            <form action="{{ asset('dashboard/users/'.$user->id) }}" method="post">
+                                @csrf
+                                @method('delete')
+                                <button type="submit">SI</button>
+                            </form>
+                            <a  onclick="ocultar({{ $user->id }})" >NO</a>
+                        </div>
+                        
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+
     <table>
         <thead>
             <tr>
@@ -77,6 +119,33 @@
     </table>
 </body>
 <script>
+    function sumar(idcito){
+        var edad = document.getElementById('edadcita'+idcito);
+        edad.value = parseInt(edad.value) + 1;
+    }
+    function restar(idcito){
+        var edad = document.getElementById('edadcita'+idcito);
+        if(parseInt(edad.value) == 0){
+            alert('no seas webon no se puede poner edad negativa, ya naciste')
+        }else{
+            edad.value = parseInt(edad.value) - 1;
+        }
+     }
+
+
+
+
+    function mostrar(id){
+        var $contenedor = document.getElementById('contenedor'+id);
+        $contenedor.style.display='block';
+    }
+    function ocultar(id){
+        var $contenedor = document.getElementById('contenedor'+id);
+        $contenedor.style.display='none';
+    }
+
+
+
     var numero = 0;
     var ope = 'no';
     function boton(num){
