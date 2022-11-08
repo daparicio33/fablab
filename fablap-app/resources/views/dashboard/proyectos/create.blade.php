@@ -41,6 +41,8 @@
                         <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
                     </small>
                 @enderror
+                {!! Form::label(null, 'Tipo de Proyecto', [null]) !!}
+                {!! Form::select('tproyecto_id', $tproyectos, null, ['class'=>'form-control']) !!}
                 {!! Form::hidden('user_id', auth()->id(), [null]) !!}
                 <button type="submit" id="btn" class="btn btn-primary mt-3">
                     <i class="fas fa-download"></i>

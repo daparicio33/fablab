@@ -37,18 +37,18 @@
             <ul>
               <li class="d-flex align-items-center">
                 <i class="bi bi-person"></i> 
-                <a href="blog-details.html">{{ $proyecto->user->name }}</a>
+                <a href="#">{{ $proyecto->user->name }}</a>
               </li>
               <li class="d-flex align-items-center">
                 <i class="bi bi-clock"></i> 
-                <a href="blog-details.html">
+                <a href="#">
                   <time datetime="2020-01-01">{{ date('d-M-Y',strtotime($proyecto->fecha)) }}</time>
                 </a>
               </li>
               <li class="d-flex align-items-center">
                 <i class="bi bi-chat-dots"></i> 
-                <a href="blog-details.html">
-                  12 Comments
+                <a href="{{ route('home.proyectoxcategoria',$proyecto->tproyecto->id) }}">
+                  {{ $proyecto->tproyecto->nombre }}
                 </a>
               </li>
             </ul>
@@ -66,7 +66,7 @@
           <div class="meta-top">
             <div class="accordion accordion-flush" id="accordionFlushExample">
               @foreach ($proyecto->entradas as $entrada)
-                <div class="accordion-item">
+                <div class="accordion-item" id="entrada{{ $entrada->id }}">
                   <h2 class="accordion-header" id="flush-headingOne{{ $entrada->id }}">
                     <button class="accordion-button collapsed" 
                     type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ $entrada->id }}" 
@@ -74,6 +74,28 @@
                       {{ $entrada->titulo }}
                     </button>
                   </h2>
+                  @php
+                      $imagen = 0;
+                      $video = 0;
+                      $archivo = 0;
+                  @endphp
+                  @foreach ($entrada->medias as $media)
+                    @if ($media->tipo == 'imagen')
+                      @php
+                          $imagen = $imagen + 1;
+                      @endphp
+                    @endif
+                    @if ($media->tipo == 'video')
+                      @php
+                          $video = $video + 1;
+                      @endphp
+                    @endif
+                    @if ($media->tipo == 'archivo')
+                      @php
+                          $archivo = $archivo + 1;
+                      @endphp
+                    @endif
+                  @endforeach
                   <div id="flush-collapse{{ $entrada->id }}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{ $entrada->id }}" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                     {{-- entradas de imagenes --}}
@@ -81,60 +103,67 @@
                         <p>
                           {{ $entrada->descripcion }} <code><small>{{ date('d-M-Y',strtotime($entrada->fecha)) }}</small></code>
                         </p>
-                        <label for="" class="mb-5">
-                          <i class="bi bi-images"></i> Imagenes
-                        </label>
-                        @foreach ($entrada->medias as $media)
-                          @if ($media->tipo == 'imagen')
-                            <div class="col-sm-12 col-md-3 col-lg-3">
-                              <figure class="figure">
-                                <a data-zoomable="true" data-glightbox="description:{{ $media->descripcion }}" href="{{ Storage::url($media->url) }}" class="glightbox" data-gallery="gallery{{ $entrada->id }}">
-                                  <img src="{{ Storage::url($media->url) }}" class="figure-img img-fluid rounded" alt="imagen no disponible">
-                                </a>
-                                <figcaption class="figure-caption">{{ $media->descripcion }}</figcaption>
-                              </figure>
-                            </div>
-                          @endif
-                        @endforeach
-                        {{-- termina las imagenes --}}
-                        <label for="">
-                          <i class="bi bi-camera-reels"></i> Videos 
-                        </label>
-                        @foreach ($entrada->medias as $media)
-                          @if ($media->tipo == 'video')
-                          <div class="col-sm-12 col-md-12 col-lg-12">
-                            <section id="call-to-action" class="call-to-action">
-                              <div class="container text-center" data-aos="zoom-out">
-                                <a href="{{ $media->url }}" class="glightbox play-btn"></a>
-                                <p>{{ $media->descripcion }}</p>
-                              </div>
-                            </section>
-                          </div>
-                          @endif
-                        @endforeach
-                        {{-- termina los videos --}}
-                        <label for="">
-                          <i class="bi bi-archive"></i> Archivos 
-                        </label>
-                          <div class="col-sm-12 col-md-12 col-lg-12">
-                                @foreach ($entrada->medias as $media)
-                                  @if ($media->tipo == 'archivo')
-                                  <div class="card mt-3">
-                                  <div class="card-body">
-                                    <small>{{ $media->descripcion }}</small>
-                                  </div>
-                                  <div class="card-footer text-muted">
-                                    <a href="{{ Storage::url($media->url) }}">
-                                      <small>
-                                        <i class="bi bi-cloud-download"></i> descargar
-                                      </small>
+                          @if ($imagen > 0)
+                            <label for="" class="mb-5">
+                              <i class="bi bi-images"></i> Imagenes
+                            </label>
+                            @foreach ($entrada->medias as $media)
+                              @if ($media->tipo == 'imagen')
+                                <div class="col-sm-12 col-md-3 col-lg-3">
+                                  <figure class="figure">
+                                    <a data-zoomable="true" data-glightbox="description:{{ $media->descripcion }}" href="{{ Storage::url($media->url) }}" class="glightbox" data-gallery="gallery{{ $entrada->id }}">
+                                      <img src="{{ Storage::url($media->url) }}" class="figure-img img-fluid rounded" alt="imagen no disponible">
                                     </a>
-                                  </div>
-                                  </div>
-                                  @endif
-                                @endforeach
-                          </div>
-                        {{-- fin de archivos --}}
+                                    <figcaption class="figure-caption">{{ $media->descripcion }}</figcaption>
+                                  </figure>
+                                </div>
+                              @endif
+                            @endforeach
+                            {{-- termina las imagenes --}}  
+                          @endif                  
+                        @if ($video > 0)
+                          <label for="">
+                            <i class="bi bi-camera-reels"></i> Videos 
+                          </label>
+                          @foreach ($entrada->medias as $media)
+                            @if ($media->tipo == 'video')
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                              <section id="call-to-action" class="call-to-action">
+                                <div class="container text-center" data-aos="zoom-out">
+                                  <a href="{{ $media->url }}" class="glightbox play-btn"></a>
+                                  <p>{{ $media->descripcion }}</p>
+                                </div>
+                              </section>
+                            </div>
+                            @endif
+                          @endforeach
+                          {{-- termina los videos --}}
+                        @endif
+
+                        @if ($archivo > 0)
+                          <label for="">
+                            <i class="bi bi-archive"></i> Archivos 
+                          </label>
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                  @foreach ($entrada->medias as $media)
+                                    @if ($media->tipo == 'archivo')
+                                    <div class="card mt-3">
+                                    <div class="card-body">
+                                      <small>{{ $media->descripcion }}</small>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                      <a href="{{ Storage::url($media->url) }}">
+                                        <small>
+                                          <i class="bi bi-cloud-download"></i> descargar
+                                        </small>
+                                      </a>
+                                    </div>
+                                    </div>
+                                    @endif
+                                  @endforeach
+                            </div>
+                          {{-- fin de archivos --}}
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -282,26 +311,10 @@
 
         <div class="sidebar">
 
-          <div class="sidebar-item search-form">
-            <h3 class="sidebar-title">Buscar</h3>
-            <form action="" class="mt-3">
-              <input type="text">
-              <button type="submit"><i class="bi bi-search"></i></button>
-            </form>
-          </div><!-- End sidebar search formn-->
-
-          {{-- <div class="sidebar-item categories">
-            <h3 class="sidebar-title">Categories</h3>
-            <ul class="mt-3">
-              <li><a href="#">General <span>(25)</span></a></li>
-              <li><a href="#">Lifestyle <span>(12)</span></a></li>
-              <li><a href="#">Travel <span>(5)</span></a></li>
-              <li><a href="#">Design <span>(22)</span></a></li>
-              <li><a href="#">Creative <span>(8)</span></a></li>
-              <li><a href="#">Educaion <span>(14)</span></a></li>
-            </ul>
-          </div><!-- End sidebar categories--> --}}
-
+          @include('layouts.search')
+          <!-- End sidebar search formn-->
+          @include('layouts.categorias')          
+          {{-- categorias --}}
           <div class="sidebar-item recent-posts">
             <h3 class="sidebar-title">Entradas del Proyecto</h3>
 
@@ -310,7 +323,7 @@
                 <div class="post-item" style="overflow: auto" >
                   <img src="{{ Storage::url('public/defaultLogo.png') }}" alt="">
                   <div>
-                    <h4><a href="blog-details.html">{{ $entrada->titulo }}</a></h4>
+                    <h4><a href="#entrada{{ $entrada->id }}">{{ $entrada->titulo }}</a></h4>
                     <time datetime="2020-01-01">{{ date('d-M-Y',strtotime($entrada->fecha)) }}</time>
                   </div>
                 </div>
@@ -321,6 +334,7 @@
           </div><!-- End sidebar recent posts-->
 
           {{-- <div class="sidebar-item tags">
+
             <h3 class="sidebar-title">Tags</h3>
             <ul class="mt-3">
               <li><a href="#">App</a></li>

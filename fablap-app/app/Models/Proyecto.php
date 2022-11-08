@@ -13,11 +13,15 @@ class Proyecto extends Model
         'descripcion',
         'fecha',
         'user_id',
+        'tproyecto_id'
     ];
     public function entradas(){
         return $this->hasMany(Entrada::class);
     }
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    public function tproyecto(){
+        return $this->belongsTo(Tproyecto::class);
     }
 }

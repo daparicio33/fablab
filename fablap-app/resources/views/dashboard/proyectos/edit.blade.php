@@ -15,42 +15,6 @@
 @stop
 @section('content')
 {!! Form::model($proyecto, ['route'=>['dashboard.proyectos.update',$proyecto->id],'enctype'=>'multipart/form-data','method'=>'PUT']) !!}
-   {{-- <div class="row">
-    <div class="col-sm-8 col-ml-7 col-xl-5 mx-auto">
-        <div class="card text-start">
-          <div class="card-body">
-            <div class="form-group">
-                {!! Form::label(null, 'Nombre', [null]) !!}
-                {!! Form::text('nombre', null, ['class'=>'form-control']) !!}
-                @error('nombre')
-                    <small class="alert alert-danger d-block p-1 mt-1" role="alert">
-                        <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
-                    </small>
-                @enderror
-                {!! Form::label(null, 'Fecha', [null]) !!}
-                {!! Form::date('fecha', null, ['class'=>'form-control']) !!}
-                @error('fecha')
-                    <small class="alert alert-danger d-block p-1 mt-1" role="alert">
-                        <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
-                    </small>
-                @enderror
-                {!! Form::label(null, 'Descripcion', [null]) !!}
-                {!! Form::textarea('descripcion', null, ['class'=>'form-control']) !!}
-                @error('descripcion')
-                    <small class="alert alert-danger d-block p-1 mt-1" role="alert">
-                        <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
-                    </small>
-                @enderror
-                {!! Form::hidden('user_id', auth()->id(), [null]) !!}
-                <button type="submit" id="btn" class="btn btn-primary mt-3">
-                    <i class="fas fa-download"></i>
-                    Guardar
-                </button>
-            </div>
-          </div>
-        </div>
-    </div>
-   </div> --}}
    <div class="row">
     <div class="col-sm-12 col-ml-5 col-xl-5">
         <div class="card text-start">
@@ -73,10 +37,12 @@
                 {!! Form::label(null, 'Descripcion', [null]) !!}
                 {!! Form::textarea('descripcion', null, ['class'=>'form-control']) !!}
                 @error('descripcion')
-                    <small class="alert alert-danger d-block p-1 mt-1" role="alert">
+                    <small class="alert  alert-danger d-block p-1 mt-1" role="alert">
                         <i class="fas fa-exclamation-triangle"> </i> {{ $message }}
                     </small>
                 @enderror
+                {!! Form::label(null, 'Tipo de Proyecto', [null]) !!}
+                {!! Form::select('tproyecto_id', $tproyectos, null, ['class'=>'form-control']) !!}
                 {!! Form::hidden('user_id', auth()->id(), [null]) !!}
                 <button type="submit" id="btn" class="btn btn-primary mt-3">
                     <i class="fas fa-download"></i>

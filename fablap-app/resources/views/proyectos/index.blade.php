@@ -6,7 +6,10 @@
     <div class="container position-relative">
       <div class="row d-flex justify-content-center">
         <div class="col-lg-6 text-center">
-          <h2>Proyectos</h2>
+          <h2>
+            Proyectos
+            @if (isset($categoria)) - {{ $categoria }} @endif
+          </h2>
           <p>nuestra lista de proyectos FAB LAB</p>
         </div>
       </div>
@@ -16,7 +19,9 @@
     <div class="container">
       <ol>
         <li><a href="{{ route('home') }}">Inicio</a></li>
-        <li>Proyectos</li>
+        <li>
+          Proyectos
+        </li>
       </ol>
     </div>
   </nav>

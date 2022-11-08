@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProyectoRequest;
 use App\Models\Entrada;
 use App\Models\Proyecto;
+use App\Models\Tproyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -36,7 +37,9 @@ class ProyectoController extends Controller
     public function create()
     {
         //
-        return view('dashboard.proyectos.create');
+        $tproyectos = Tproyecto::pluck('nombre','id')
+        ->toArray();
+        return view('dashboard.proyectos.create',compact('tproyectos'));
     }
 
     /**
@@ -57,6 +60,7 @@ class ProyectoController extends Controller
                 $proyecto->fecha = $request->fecha;
                 $proyecto->user_id = auth()->id();
                 $proyecto->url = $url;
+                $proyecto->tproyecto_id = $request->tproyecto_id;
                 $proyecto->save();
             }else{
                 $proyecto->create($request->all());
@@ -97,7 +101,9 @@ class ProyectoController extends Controller
     {
         //
         $proyecto = Proyecto::findOrFail($id);
-        return view('dashboard.proyectos.edit',compact('proyecto'));
+        $tproyectos = Tproyecto::pluck('nombre','id')
+        ->toArray();
+        return view('dashboard.proyectos.edit',compact('proyecto','tproyectos'));
     }
 
     /**
@@ -120,6 +126,7 @@ class ProyectoController extends Controller
                 $proyecto->fecha = $request->fecha;
                 $proyecto->user_id = auth()->id();
                 $proyecto->url = $url;
+                $proyecto->tproyecto_id = $request->tproyecto_id;
                 $proyecto->update();
             }else{
                 $proyecto->update($request->all());
