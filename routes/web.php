@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
@@ -33,6 +34,8 @@ Route::get('proyectos/{id}',[HomeController::class,'proyectoShow'])->name('home.
 Route::get('proyectos/',[HomeController::class,'proyectoIndex'])->name('home.proyectos');
 Route::get('nosotros/',[HomeController::class,'nosotros'])->name('home.nosotros');
 Route::get('contacto/',[HomeController::class,'contacto'])->name('home.contacto');
+Route::get('noticias/{id}',[HomeController::class,'noticiaShow'])->name('home.noticias.show');
+Route::get('noticias/',[HomeController::class,'noticiaIndex'])->name('home.noticias');
 
 //Rutas de los creadores del Fablab
 Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
@@ -42,7 +45,8 @@ Route::resource('dashboard/entradas',EntradaController::class)
 ->names('dashboard.entradas');
 Route::resource('dashboard/medias',MediaController::class)
 ->names('dashboard.medias');
-
+Route::resource('dashboard/noticias',NoticiaController::class)
+->names('dashboard.noticias');
 
 /* Route::get('calculadora',function(){
     $users = User::all();

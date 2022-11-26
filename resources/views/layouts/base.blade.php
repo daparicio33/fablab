@@ -83,8 +83,8 @@
           <h4>Enlaces</h4>
           <ul>
             <li><a href="{{ route('home') }}">Inicio</a></li>
-            <li><a href="{{ route('home.proyectos') }}">Proyectos</a></li>
             <li><a href="{{ route('home.nosotros') }}">Nosotros</a></li>
+            <li><a href="{{ route('home.proyectos') }}">Proyectos</a></li>
             {{-- <li><a href="#">Services</a></li>
             <li><a href="#">Terms of service</a></li>
             <li><a href="#">Privacy policy</a></li> --}}
@@ -109,7 +109,7 @@
             Chachapoyas - Amazonas<br>
             Perú<br><br>
             <strong>Telefono:</strong> 041-750047<br>
-            <strong>Correo:</strong> soporte@idexperujapon.edu.pe<<br>
+            <strong>Correo:</strong> soporte@idexperujapon.edu.pe<br>
           </p>
 
         </div>

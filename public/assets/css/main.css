@@ -69,7 +69,7 @@ section {
 
 .section-header {
   text-align: center;
-  padding-bottom: 60px;
+  padding-bottom: 25px;
 }
 
 .section-header h2 {
@@ -1055,9 +1055,8 @@ section {
 }
 
 .testimonials .testimonial-item .testimonial-img {
-  width: 90px;
-  border-radius: 50px;
-  margin-right: 15px;
+  width: 100%;
+  border-radius: 10px;
 }
 
 .testimonials .testimonial-item h3 {

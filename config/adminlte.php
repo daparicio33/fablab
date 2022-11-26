@@ -351,6 +351,11 @@ return [
             'url'=>'administradores/proyectos',
             'can'=>'dashboard.administrators.index'
         ],
+        [
+            'text'=>'Noticias',
+            'icon'=>'fas fa-fw fa-share',
+            'url'=>'dashboard/noticias'
+        ],
         /* [
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
@@ -443,6 +448,21 @@ return [
     */
 
     'plugins' => [
+        'Summernote' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.min.js',
+                ],
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/summernote/summernote-bs4.min.css',
+                ],
+            ],
+        ],
         'Datatables' => [
             'active' => false,
             'files' => [

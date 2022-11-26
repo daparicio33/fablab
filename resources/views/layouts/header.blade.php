@@ -6,15 +6,17 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{{ route('home') }}">Inicio</a></li>
-          <li><a href="{{ route('home.proyectos') }}">Proyectos</a></li>
-          <li class="dropdown"><a href="#"><span>Categorias</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-                @foreach ($tproyectos as $tproyecto)
-                    <li><a href="{{ route('home.proyectoxcategoria',$tproyecto->id) }}">{{ $tproyecto->nombre }}</a></li>    
-                @endforeach
-            </ul>
-          </li>
           <li><a href="{{ route('home.nosotros') }}">Nosotros</a></li>
+          <li class="dropdown">
+            <a href="{{ route('home.proyectos') }}"><span>Proyectos</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              @foreach ($tproyectos as $tproyecto)
+                  <li><a href="{{ route('home.proyectoxcategoria',$tproyecto->id) }}">{{ $tproyecto->nombre }}</a></li>    
+              @endforeach
+          </ul>
+          </li>
+          <li><a href="{{ route('home.noticias') }}">Noticias</a></li>
+          <li><a href="{{ route('home.nosotros') }}">Servicios</a></li>
         {{-- 
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#team">Team</a></li>
