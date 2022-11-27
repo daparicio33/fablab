@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NoticiaController;
 use App\Http\Controllers\ProyectoController;
+use App\Http\Controllers\ServicioController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,8 @@ Route::resource('dashboard/medias',MediaController::class)
 ->names('dashboard.medias');
 Route::resource('dashboard/noticias',NoticiaController::class)
 ->names('dashboard.noticias');
+Route::resource('dashboard/servicios',ServicioController::class)
+->names('dashboard.servicios');
 
 /* Route::get('calculadora',function(){
     $users = User::all();

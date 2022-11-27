@@ -40,10 +40,10 @@
                         <img title="{{ $noticia->user->name }}" class="rounded mx-auto d-block" style="width: 70px" src="{{ Storage::url($noticia->user->foto) }}" alt="">
                     </td>
                     <td>{{ $noticia->fecha }}</td>
-                    <td style="width: 160px">
-                        <a data-target="#modal-multimedia-{{$noticia->id}}" data-toggle="modal" title="Multimedia" class="btn btn-success">
+                    <td style="width: 120px">
+                        {{-- <a data-target="#modal-multimedia-{{$noticia->id}}" data-toggle="modal" title="Multimedia" class="btn btn-success">
                             <i class="fas fa-images"></i>
-                        </a>
+                        </a> --}}
                         <a href="{{ route('dashboard.noticias.edit',$noticia->id) }}" title="Editar noticia" class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                         </a>
@@ -52,7 +52,7 @@
                         </a>
                     </td>
                 </tr>
-                {{-- @include('dashboard.administrator.modal') --}}
+                @include('dashboard.noticias.modal')
                 @endforeach
             </tbody>
         </table>

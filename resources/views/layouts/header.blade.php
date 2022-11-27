@@ -16,7 +16,7 @@
           </ul>
           </li>
           <li><a href="{{ route('home.noticias') }}">Noticias</a></li>
-          <li><a href="{{ route('home.nosotros') }}">Servicios</a></li>
+          <li><a href="#services">Servicios</a></li>
         {{-- 
             <li><a href="#portfolio">Portfolio</a></li>
             <li><a href="#team">Team</a></li>

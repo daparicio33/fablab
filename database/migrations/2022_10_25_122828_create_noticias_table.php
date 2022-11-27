@@ -17,6 +17,7 @@ class CreateNoticiasTable extends Migration
             $table->id();
             $table->string('titulo');
             $table->text('texto');
+            $table->longText('contenido')->nullable();
             $table->date('fecha');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

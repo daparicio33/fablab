@@ -17,8 +17,8 @@ class CreateNoticiaEtiquetasTable extends Migration
             $table->id();
             $table->unsignedBigInteger('noticia_id');
             $table->unsignedBigInteger('etiqueta_id');
-            $table->foreign('noticia_id')->references('id')->on('noticias');
-            $table->foreign('etiqueta_id')->references('id')->on('etiquetas');
+            $table->foreign('noticia_id')->references('id')->on('noticias')->onDelete('cascade');
+            $table->foreign('etiqueta_id')->references('id')->on('etiquetas')->onDelete('cascade');
             $table->timestamps();
         });
     }

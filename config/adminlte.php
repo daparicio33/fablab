@@ -345,16 +345,23 @@ return [
             'url'=>'dashboard/administrators',
             'can'=>'dashboard.administrators.index'
         ],
-        [
+        /* [
             'text'=>'Proyectos',
             'icon'=>'fas fa-fw fa-share',
             'url'=>'administradores/proyectos',
             'can'=>'dashboard.administrators.index'
-        ],
+        ], */
         [
             'text'=>'Noticias',
             'icon'=>'fas fa-fw fa-share',
-            'url'=>'dashboard/noticias'
+            'url'=>'dashboard/noticias',
+            'can'=>'dashboard.administrators.index'
+        ],
+        [
+            'text'=>'Servicios',
+            'icon'=>'fas fa-concierge-bell',
+            'url'=>'dashboard/servicios',
+            'can'=>'dashboard.administrators.index'
         ],
         /* [
             'text'    => 'multilevel',

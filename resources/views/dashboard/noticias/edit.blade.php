@@ -1,11 +1,11 @@
 @extends('adminlte::page')
-@section('title', 'Crear | Noticia')
+@section('title', 'Editar | Noticia')
 @section('content_header')
     <h1>
         <a href="{{ route('dashboard.noticias.index') }}" class="text-danger">
             <i class="fas fa-hand-point-left"></i>
         </a>
-        Registar nueva Noticia
+        Editar Noticia
     </h1>
     <p>
         <small>
@@ -15,7 +15,7 @@
 @stop
 @section('content')
 @section('plugins.Summernote', true)
-{!! Form::open(['route'=>'dashboard.noticias.store','id'=>'frm','enctype'=>'multipart/form-data']) !!}
+{!! Form::model($noticia, ['route'=>['dashboard.noticias.update',$noticia->id],'id'=>'frm','enctype'=>'multipart/form-data','method'=>'PUT']) !!}
    <div class="row">
     <div class="col-sm-12 col-ml-12 col-xl-12">
         <div class="card text-start">
@@ -60,7 +60,9 @@
                 ]
                 @endphp
                 <x-adminlte-text-editor name="contenido" label="Contenido" label-class="text-danger"
-                    igroup-size="sm" placeholder="Write some text..." :config="$config"/>
+                    igroup-size="sm" placeholder="Write some text..." :config="$config">
+                    {{ $noticia->contenido }}
+                </x-adminlte-text-editor>
                 {!! Form::label(null, 'Imagen', [null]) !!}
                 <input type="file" name="url" id="url" class="form-control mb-4" onchange="previewimage(event,'#imgpreview')">
                 <div class="col-sm-12 col-md-4 mx-auto">
@@ -73,8 +75,11 @@
                 @enderror
                 {!! Form::label(null, 'Etiquetas', [null]) !!}
                 @foreach ($etiquetas as $etiqueta)
+                    @php
+                        $existe = existeEtiqueta($etiqueta->id,$noticia->id);
+                    @endphp
                     <div class="form-check">
-                        {!! Form::checkbox('etiquetas[]', $etiqueta->id,null, ['class'=>'form-check-input']) !!}
+                        {!! Form::checkbox('etiquetas[]', $etiqueta->id,$existe, ['class'=>'form-check-input']) !!}
                         <label class="form-check-label">
                             {{$etiqueta->nombre}}
                         </label>

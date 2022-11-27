@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Etiqueta;
 use App\Models\Noticia;
 use App\Models\Proyecto;
+use App\Models\Servicio;
 use App\Models\Tproyecto;
 use Illuminate\Http\Request;
 
@@ -40,7 +41,9 @@ class HomeController extends Controller
         //mandamos las noticias
         $noticias = Noticia::orderBy('id','desc')
         ->get();
-        return view('index',compact('proyectos','tproyectos','noticias'));
+        //mandamos los servicios
+        $servicios = Servicio::get();
+        return view('index',compact('proyectos','tproyectos','noticias','servicios'));
     }
     public function proyectoShow($id){
         $proyecto = Proyecto::findOrFail($id);
@@ -58,7 +61,8 @@ class HomeController extends Controller
         return view ('nosotros',compact('tproyectos'));
     }
     public function contacto(){
-        return view('contacto');
+        $tproyectos = $this->tproyectos;
+        return view('contacto',compact('tproyectos'));
     }
     public function proyectoxcategoria($id){
         $tproyectos = Tproyecto::orderBy('nombre','asc')

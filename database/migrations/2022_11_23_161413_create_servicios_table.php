@@ -18,6 +18,7 @@ class CreateServiciosTable extends Migration
             $table->string('nombre')->unique();
             $table->string('url');
             $table->text('descripcion');
+            $table->text('icon');
             $table->timestamps();
         });
     }

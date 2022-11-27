@@ -60,6 +60,9 @@
             <p style="text-align: justify">
               {{ $noticia->texto }}
             </p>
+            @php  
+             echo $noticia->contenido;
+            @endphp
           </div>
         </article>
         <!-- End blog post -->
