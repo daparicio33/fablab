@@ -112,7 +112,7 @@
                                             <p class="card-text">
                                                 {{ $media->descripcion }}
                                             </p>
-                                            <a href="" data-target="#modal-delete-{{$media->id}}" data-toggle="modal" class="btn btn-danger" title="eliminar">
+                                            <a href="" data-target="#mdelete-{{$media->id}}" data-toggle="modal" class="btn btn-danger" title="eliminar">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                             </div>
